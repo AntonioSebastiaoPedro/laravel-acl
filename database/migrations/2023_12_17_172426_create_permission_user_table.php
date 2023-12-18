@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('permission_user', function (Blueprint $table) {
-            $table->id();
-            $table
+            $table->id('permission_id');
+            $table->id('user_id');
+            $table->primmary(['permission_id', 'user_id']);
+            $table->foreign('permission_id')->references('id')->on('permission')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
