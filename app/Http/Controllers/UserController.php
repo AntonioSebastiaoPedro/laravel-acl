@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\Users\CreateUserDTO;
 use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -26,12 +27,15 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
+        $user = $this->userRepository->createNew(New CreateUserDTO(
+            $request->name,
+            $request->email,
+            $request->password,
+        ));
+        return new UserResource($user);
     }
 
     /**

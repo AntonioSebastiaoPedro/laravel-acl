@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\DTOs\Users\CreateUserDTO;
 use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -18,5 +19,13 @@ class UserRepository
                 $query->where('name', 'LIKE', "%{$filter}%");
             }
         })->paginate($totalPerPage, ['*'], $page);
+    }
+
+    public function createNew(CreateUserDTO $userDto): User
+    {
+        $data = (array) $userDto;
+        $data['password'] = bcrypt($data['password']);
+        
+        return $this->user->create($data);
     }
 }
