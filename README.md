@@ -1,14 +1,17 @@
 
-# Setup Docker Laravel 10 com PHP 8.1
-[Assine a Academy, e Seja VIP!](https://academy.especializati.com.br)
+# API de Usuários com Permissões e Autenticação usando Laravel 10 e PHP 8.2. 
+
+### Requisitos
+1- Ter o Docker instalado.
+2- Ter uma Plataforma de Desenvolvimento de API (Swagger/OpenAPI, Postman, Insomnia, etc.)
 
 ### Passo a passo
 Clone Repositório
 ```sh
-git clone -b laravel-10-com-php-8.1 https://github.com/especializati/setup-docker-laravel.git app-laravel
+git clone -b laravel-10-com-php-8.1 https://github.com/AntonioSebastiaoPedro/laravel-acl.git
 ```
 ```sh
-cd app-laravel
+cd laravel-acl
 ```
 
 
@@ -64,5 +67,6 @@ php artisan key:generate
 ```
 
 
-Acesse o projeto
-[http://localhost:8989](http://localhost:8989)
+Acesse a Plataforma de Desenvolvimento de API
+
+Link base da API [http://localhost:8989](http://localhost:8989)
