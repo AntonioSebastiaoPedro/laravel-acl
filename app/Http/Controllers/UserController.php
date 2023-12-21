@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\DTOs\Users\CreateUserDTO;
-use App\Http\Requests\StoreUserRequest;
+use App\DTOs\Users\{CreateUserDTO, EditUserDTO};
+use App\Http\Requests\{StoreUserRequest, UpdateUserRequest};
 use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
@@ -31,28 +30,32 @@ class UserController extends Controller
     
     public function store(StoreUserRequest $request)
     {
-        $user = $this->userRepository->createNew(New CreateUserDTO(
-            $request->name,
-            $request->email,
-            $request->password,
-        ));
+        $user = $this->userRepository->createNew(New CreateUserDTO(...$request->validated()));
         return new UserResource($user);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(string $id)
-    {
-        //
+    {  
+        if(!$user = $this->userRepository->findById($id)){
+            return response()->json(['message' => 'User Not Found'], 404);
+        }
+        return new UserResource($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        
+        $updateUser = $this->userRepository->update(
+                    new EditUserDTO(...[$id, ...$request->validated()])
+                ); 
+        if(!$updateUser){
+            return response()->json(['message' => 'User Not Found'], 404);
+        }
+        return response()->json([
+            'message' => 'User Updated Successfuly',
+        ]);
     }
 
     /**
