@@ -49,7 +49,7 @@ class UserController extends Controller
         
         $updateUser = $this->userRepository->update(
                     new EditUserDTO(...[$id, ...$request->validated()])
-                ); 
+                );
         if(!$updateUser){
             return response()->json(['message' => 'User Not Found'], 404);
         }
@@ -58,11 +58,12 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(string $id)
     {
-        //
+        if(!$this->userRepository->delete($id)){
+            return response()->json(['message' => 'User Not Found'], 404);
+        }
+        return response()->json([], 204);
     }
 }
