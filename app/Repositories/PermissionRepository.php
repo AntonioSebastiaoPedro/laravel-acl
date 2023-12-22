@@ -18,4 +18,9 @@ class PermissionRepository
             }
         })->paginate($totalPerPage, ['*'], $page);
     }
+
+    public function findtById(string $id): ?Permission
+    {
+        return $this->permission->find($id);
+    }
 }

@@ -28,12 +28,13 @@ class PermissionController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(string $id)
     {
-        //
+        if(!$user = $this->permissionRepository->findtById($id)){
+            return response()->json(['message' => 'Permission Not Found'], 404);
+        }
+        return new PermissionResource($user);
     }
 
     /**
