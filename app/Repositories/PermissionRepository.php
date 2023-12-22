@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\DTOs\Permissions\CreatePermissionDTO;
 use App\Models\Permission;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -22,5 +23,10 @@ class PermissionRepository
     public function findtById(string $id): ?Permission
     {
         return $this->permission->find($id);
+    }
+
+    public function createNew(CreatePermissionDTO $permissionDTO): Permission
+    {
+        return $this->permission->create((array) $permissionDTO);
     }
 }

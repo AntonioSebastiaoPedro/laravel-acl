@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\Permissions\CreatePermissionDTO;
+use App\Http\Requests\StoreUpdatePermissionRequest;
 use App\Http\Resources\PermissionResource;
 use App\Repositories\PermissionRepository;
 use Illuminate\Http\Request;
@@ -20,12 +22,11 @@ class PermissionController extends Controller
         return PermissionResource::collection($permissions);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    
+    public function store(StoreUpdatePermissionRequest $request)
     {
-        //
+           $user = $this->permissionRepository->createNew(new CreatePermissionDTO(...$request->validated()));
+           return new PermissionResource($user);
     }
 
     
@@ -37,9 +38,7 @@ class PermissionController extends Controller
         return new PermissionResource($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, string $id)
     {
         //
