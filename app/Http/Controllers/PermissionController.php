@@ -51,11 +51,12 @@ class PermissionController extends Controller
         return response()->json(['message' => 'Permission Updated Successfuly']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        if(!$this->permissionRepository->delete($id)){
+            return response()->json(['message' => 'Permission Not Found'], 404);
+        }
+        return response()->json([], 204);
     }
 }

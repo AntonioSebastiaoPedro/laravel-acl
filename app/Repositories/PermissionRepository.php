@@ -38,4 +38,12 @@ class PermissionRepository
         }
         return $permission->update((array) $permissionDTO);
     }
+
+    public function delete(string $id): bool
+    {
+        if(!$permission = $this->findtById($id)){
+            return false;
+        }
+        return $permission->delete();
+    }
 }
