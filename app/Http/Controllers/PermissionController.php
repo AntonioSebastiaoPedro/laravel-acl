@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DTOs\Permissions\CreatePermissionDTO;
+use App\DTOs\Permissions\EditPermissionDTO;
 use App\Http\Requests\StoreUpdatePermissionRequest;
 use App\Http\Resources\PermissionResource;
 use App\Repositories\PermissionRepository;
@@ -39,9 +40,15 @@ class PermissionController extends Controller
     }
 
     
-    public function update(Request $request, string $id)
+    public function update(StoreUpdatePermissionRequest $request, string $id)
     {
-        //
+        $permissionUpdate = $this->permissionRepository->update(
+                                new EditPermissionDTO(...[$id, ...$request->validated()])
+                            );
+        if(!$permissionUpdate){
+            return response()->json(['message' => 'Permission Not Found'], 404);
+        }
+        return response()->json(['message' => 'Permission Updated Successfuly']);
     }
 
     /**

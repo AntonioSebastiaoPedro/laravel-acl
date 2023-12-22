@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\DTOs\Permissions\CreatePermissionDTO;
+use App\DTOs\Permissions\EditPermissionDTO;
 use App\Models\Permission;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -28,5 +29,13 @@ class PermissionRepository
     public function createNew(CreatePermissionDTO $permissionDTO): Permission
     {
         return $this->permission->create((array) $permissionDTO);
+    }
+
+    public function update(EditPermissionDTO $permissionDTO): bool
+    {
+        if(!$permission = $this->findtById($permissionDTO->id)){
+            return false;
+        }
+        return $permission->update((array) $permissionDTO);
     }
 }
