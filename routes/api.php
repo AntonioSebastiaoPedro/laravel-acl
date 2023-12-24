@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\{PermissionController, UserController};
+use App\Http\Controllers\Auth\AuthApiController;
 use Illuminate\Support\Facades\Route;
+
+Route::post('/auth', [AuthApiController::class, 'auth'])->name('auth');
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
