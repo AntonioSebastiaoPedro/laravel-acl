@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth', [AuthApiController::class, 'auth'])->name('auth');
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/me', [AuthApiController::class, 'me'])->name('auth.me');
     Route::post('/logout', [AuthApiController::class, 'logout'])->name('logout');
-    
+
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
