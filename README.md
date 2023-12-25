@@ -8,7 +8,7 @@
 ### Passo a passo
 Clone Repositório
 ```sh
-git clone -b laravel-10-com-php-8.1 https://github.com/AntonioSebastiaoPedro/laravel-acl.git
+git clone -b https://github.com/AntonioSebastiaoPedro/laravel-acl.git
 ```
 ```sh
 cd laravel-acl
