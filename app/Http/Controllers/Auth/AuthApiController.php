@@ -19,7 +19,14 @@ class AuthApiController extends Controller
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
+        $user->tokens()->delete();
         $token = $user->createToken($request->device_name)->plainTextToken;
         return response()->json(['token' => $token]);
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([], 204);
     }
 }
