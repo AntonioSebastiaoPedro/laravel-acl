@@ -76,4 +76,8 @@ class UserRepository
         return $this->findById($userId)->permissions;
     }
 
+    public function hasPermission(User $user, string $permission): bool
+    {
+        return $user->permissions()->where('name', $permission)->exists();
+    }
 }
