@@ -78,6 +78,9 @@ class UserRepository
 
     public function hasPermission(User $user, string $permission): bool
     {
+        if($user->isSuperAdmin()){
+            return true;
+        }
         return $user->permissions()->where('name', $permission)->exists();
     }
 }
