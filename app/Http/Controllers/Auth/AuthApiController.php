@@ -28,7 +28,7 @@ class AuthApiController extends Controller
 
     public function me()
     {
-        $user = Auth::user();
+        $user = Auth::user()->load('permissions');
         return new UserResource($user);
     }
 
