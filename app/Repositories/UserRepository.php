@@ -19,7 +19,8 @@ class UserRepository
             if($filter !== ''){
                 $query->where('name', 'LIKE', "%{$filter}%");
             }
-        })->paginate($totalPerPage, ['*'], $page);
+        })->with(['permissions'])
+        ->paginate($totalPerPage, ['*'], $page);
     }
 
     public function createNew(CreateUserDTO $userDto): User
