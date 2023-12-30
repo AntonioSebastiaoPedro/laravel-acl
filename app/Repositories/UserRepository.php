@@ -71,4 +71,9 @@ class UserRepository
         return true;
     }
 
+    public function getPermissionsByUserId(string $userId)
+    {
+        return $this->findById($userId)->permissions;
+    }
+
 }
